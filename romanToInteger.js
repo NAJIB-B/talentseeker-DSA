@@ -1,5 +1,7 @@
-// Guide if a smaller number comes before a bigger number, then you subtract the smaller from bigger
-//else you add them together
+// Guide if a current number is greater or equal to the next number,
+//then you add the current number to the result
+//but if the current number is less than the next number
+// then you subtract the current number from the result
 
 const constants = {
   i: 1,
@@ -15,18 +17,21 @@ function romanToInteger(value) {
   let romanValue = value.toLowerCase();
   let result = 0;
   let current = 0;
-  let prev = 0;
+  let next = 0;
 
   for (let i = 0; i < romanValue.length; i++) {
     current = constants[romanValue[i]];
-    if (prev < current) {
-      result = current - prev;
-      prev = current;
+    next = constants[romanValue[i + 1]];
+    if (next) {
+      if (current < next) {
+        result += -current;
+      } else if (current > next || current == next) {
+        result += current;
+      }
     } else {
       result += current;
-      prev = current;
     }
   }
   return result;
 }
-console.log(romanToInteger("xcv"));
+console.log(romanToInteger("lviii"));
