@@ -24,7 +24,7 @@ function romanToInteger(value) {
     next = constants[romanValue[i + 1]];
     if (next) {
       if (current < next) {
-        result += -current;
+        result -= current;
       } else if (current > next || current == next) {
         result += current;
       }
@@ -34,4 +34,4 @@ function romanToInteger(value) {
   }
   return result;
 }
-console.log(romanToInteger("lviii"));
+console.log(romanToInteger("mcmxciv"));
