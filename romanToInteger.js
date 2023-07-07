@@ -1,3 +1,6 @@
+// Guide if a smaller number comes before a bigger number, then you subtract the smaller from bigger
+//else you add them together
+
 const constants = {
   i: 1,
   v: 5,
@@ -11,24 +14,19 @@ const constants = {
 function romanToInteger(value) {
   let romanValue = value.toLowerCase();
   let result = 0;
-  if (romanValue.length == 1) {
-    result = constants[romanValue[0]];
-    return result;
-  } else if (romanValue.length == 2) {
-    if (constants[romanValue[0]] < constants[romanValue[1]]) {
-      result = constants[romanValue[1]] - constants[romanValue[0]];
+  let current = 0;
+  let prev = 0;
 
-      return result;
+  for (let i = 0; i < romanValue.length; i++) {
+    current = constants[romanValue[i]];
+    if (prev < current) {
+      result = current - prev;
+      prev = current;
     } else {
-      result = constants[romanValue[0]] + constants[romanValue[1]];
-      return result;
+      result += current;
+      prev = current;
     }
-  } else {
-    for (let i = 0; i < romanValue.length; i++) {
-      result += constants[romanValue[i]];
-    }
-    return result;
   }
+  return result;
 }
-
-console.log(romanToInteger("dccc"));
+console.log(romanToInteger("xcv"));
